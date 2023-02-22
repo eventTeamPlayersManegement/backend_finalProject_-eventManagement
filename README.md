@@ -1,2 +1,7 @@
 # backen_finalProject_-eventManagement
-## npm i 
+## run npm i
+### create .env with 
+              # URI=
+              #PORT=
+## run npm start for nodemon 
+## run npm dev for node
