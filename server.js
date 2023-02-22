@@ -7,7 +7,7 @@ import cors from "cors";
 // import productsRouter from "./routes/productsRouter.js";
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
-// import userRoute from "./routes/userRoute.js";
+import userRoutes from "./routes/userRoutes.js"
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -27,8 +27,10 @@ app.use(
 );
 
 //set routes
+
+
 // app.use("/api/products", productsRouter);
-// app.use("/api/users", userRoute);
+app.use("/api/users", userRoutes);
 
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
