@@ -1,59 +1,82 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema(
+  {
     firstName: {
-        type: String
+      type: String,
+      required: true,
     },
     lastName: {
-        type: String
+      type: String,
+      // required: true,
     },
-    email: { 
-        type: String,
-        unique: true,
-        validate: {
-            validator: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
-            message: "Please enter a valid email address"
-        }
+    email: {
+      type: String,
+      unique: true,
+      validate: {
+        validator: (v) =>
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
+        message: "Please enter a valid email address",
+      },
+      required: true,
     },
-    password:{
-        type: String
+    password: {
+      type: String,
+      required: true,
     },
-    admin: { 
-        type: Boolean,
-        default: false
+    admin: {
+      type: Boolean,
+      default: false,
     },
-    
-},{versionKey: false})
+  },
+  { versionKey: false },
+  { timestamps: true }
+);
 const User = mongoose.model("User", userSchema);
 
 export const getAll = async () => {
-    const users = await User.find();
-    return users;
+  const users = await User.find();
+  return users;
 };
-export const create = async (document) => {    
-    const newUser = new User(document);
-    const result = await newUser.save();
-    return result._doc;
-    
+export const create = async (document) => {
+  const newUser = new User(document);
+  if (newUser) {
+    return {
+      aprooved: true,
+      data: await newUser.save(),
+      message: "user created ",
+    };
+  } else {
+    return {
+      aprooved: false,
+      message: "user faild to create",
+    };
+  }
 };
 export const getOne = async (filter) => {
-    const user = await User.findOne(filter);
-    return user;
+  const user = await User.findOne(filter);
+  return user;
 };
 export const replace = async (userId, data) => {
-    const user = await User.findOneAndReplace({_id: userId}, data, {returnDocument: "after", runValidators: true},);
+  const user = await User.findOneAndReplace({ _id: userId }, data, {
+    returnDocument: "after",
+    runValidators: true,
+  });
 
-    return user;
+  return user;
 };
 export const update = async (userId, data) => {
-    const user = await User.findByIdAndUpdate(userId, data, {new: true, runValidators: true});
+  const user = await User.findByIdAndUpdate(userId, data, {
+    new: true,
+    runValidators: true,
+  });
 
-    return user;
+  return user;
 };
 export const deleteOne = async (userId) => {
-    const user = await User.findByIdAndDelete(userId)
+  const user = await User.findByIdAndDelete(userId);
 
-    return user;
+  return user;
 };
 
 export default User;
