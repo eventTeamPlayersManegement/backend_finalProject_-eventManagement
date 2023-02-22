@@ -3,5 +3,5 @@
 ### create .env with 
               # URI=
               #PORT=
-## run npm start for nodemon 
-## run npm dev for node
+## run npm start for- nodemon 
+## run npm dev for -node
