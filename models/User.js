@@ -28,9 +28,15 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    events: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
-  { versionKey: false },
-  { timestamps: true }
+  { timestamps: true },
+  { versionKey: false }
 );
 const User = mongoose.model("User", userSchema);
 
@@ -49,7 +55,7 @@ export const create = async (document) => {
   } else {
     return {
       aprooved: false,
-      message: "user faild to create",
+      message: "User failed to create",
     };
   }
 };
