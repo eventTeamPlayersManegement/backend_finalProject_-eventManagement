@@ -7,7 +7,7 @@ import { postUser } from "./user.schema.js";
 const userRoutes = Router();
 
 userRoutes.route("/").get(user.getAll);
-userRoutes.route("/register").post(validate(postUser), user.create);
+userRoutes.route("/signup").post(validate(postUser), user.create);
 userRoutes.route("/login").post(user.login);
 
 export default userRoutes;
