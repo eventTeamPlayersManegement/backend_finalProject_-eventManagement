@@ -42,6 +42,7 @@ const User = mongoose.model("User", userSchema);
 
 export const getAll = async () => {
   const users = await User.find();
+
   return users;
 };
 export const create = async (document) => {

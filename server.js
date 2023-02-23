@@ -18,7 +18,7 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 //set middlewares
