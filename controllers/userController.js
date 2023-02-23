@@ -28,7 +28,7 @@ export const login = async (req, res, next) => {
       if(!passwordIsEqual)return res.status(401).end();
       if(passwordIsEqual){
           const userToken = token.signToken({id: result._id})
-          const expDate = 1000 * 60 * 60 * 24
+          const expDate = 1000 * 60 * 60 * 24 * 30 * 8
           res.cookie("jwt", userToken, {
               sameSite: "lax",
               maxAge: expDate,
