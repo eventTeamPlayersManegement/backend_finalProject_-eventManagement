@@ -4,7 +4,6 @@ import token from "../lib/token.js";
 
 export const getAll = async (req, res, next) => {
   try {
-    console.log("ich bin da ");
     const result = await User.getAll();
     res.status(200).json({ result });
   } catch (error) {
@@ -13,41 +12,31 @@ export const getAll = async (req, res, next) => {
 };
 export const create = async (req, res, next) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 15);
-    req.body.password = hashedPassword;
-
-    res.status(201).json(await User.create(req.body));
+    res.status(201).json({
+      aprooved: true,
+      data: await User.create(req.body),
+      message: "user created",
+    });
   } catch (error) {
     next(error);
   }
 };
 export const login = async (req, res, next) => {
   try {
-      const result = await User.getOne({email: req.body.email});
-      const passwordIsEqual = await bcrypt.compare(req.body.password, result.password);
-      if(!passwordIsEqual)return res.status(401).end();
-      if(passwordIsEqual){
-          const userToken = token.signToken({id: result._id})
-          const expDate = 1000 * 60 * 60 * 24 * 30 * 8
-          res.cookie("jwt", userToken, {
-              sameSite: "lax",
-              maxAge: expDate,
-              httpOnly: true
-          })
-          res.cookie("loggedIn", result._id.toString(), {
-              sameSite: "lax",
-              maxAge: expDate,
-              httpOnly: false
-          })
-
-          return res.status(201).json({message: "successfully logged in", id: result._id})
-      }
-  } catch(error) {
-      next(error);
-  };
-
-  
-  
+    console.log(req.user);
+    const userToken = token.signToken({ id: req.user._id });
+    const expDate = 1000 * 60 * 60 * 24 * 30 * 8;
+    return res
+      .status(201)
+      .cookie("jwt", userToken, {
+        sameSite: "lax",
+        maxAge: expDate,
+        httpOnly: true,
+      })
+      .json({ approved: true, message: "successfully logged in" });
+  } catch (error) {
+    next({ approved: false, message: error });
+  }
 };
 export const getOne = async (req, res, next) => {
   try {
@@ -81,6 +70,16 @@ export const deleteOne = async (req, res, next) => {
   try {
     const result = await User.deleteOne(req.params.UserId);
     if (result.deletedCount > 0) return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+export const signout = async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .clearCookie("jwt")
+      .json({ aprooved: true, message: "you are logged out" });
   } catch (error) {
     next(error);
   }

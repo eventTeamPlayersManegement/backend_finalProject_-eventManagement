@@ -64,6 +64,10 @@ export const getOne = async (filter) => {
   const user = await User.findOne(filter);
   return user;
 };
+export const getOneById = async (id) => {
+  const user = await User.findById(id);
+  return user;
+};
 export const replace = async (userId, data) => {
   const user = await User.findOneAndReplace({ _id: userId }, data, {
     returnDocument: "after",
