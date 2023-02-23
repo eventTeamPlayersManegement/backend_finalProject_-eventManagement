@@ -12,17 +12,20 @@ export const getAll = async (req, res, next) => {
 };
 export const create = async (req, res, next) => {
   try {
+
     res.status(201).json({
       aprooved: true,
       data: await User.create(req.body),
       message: "user created",
     });
+
   } catch (error) {
     next(error);
   }
 };
 export const login = async (req, res, next) => {
   try {
+
     console.log(req.user);
     const userToken = token.signToken({ id: req.user._id });
     const expDate = 1000 * 60 * 60 * 24 * 30 * 8;
@@ -37,6 +40,7 @@ export const login = async (req, res, next) => {
   } catch (error) {
     next({ approved: false, message: error });
   }
+
 };
 export const getOne = async (req, res, next) => {
   try {
