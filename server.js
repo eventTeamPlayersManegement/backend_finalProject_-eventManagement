@@ -4,7 +4,6 @@ dotenv.config();
 import "./lib/connecting.js";
 import morgan from "morgan";
 import cors from "cors";
-// import productsRouter from "./routes/productsRouter.js";
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -18,12 +17,12 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 //set middlewares
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(
   cors({
@@ -33,7 +32,6 @@ app.use(
 );
 
 //set routes
-
 
 // app.use("/api/products", productsRouter);
 app.use("/api/users", userRoutes);
