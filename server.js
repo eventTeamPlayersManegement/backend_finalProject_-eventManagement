@@ -4,7 +4,7 @@ dotenv.config();
 import "./lib/connecting.js";
 import morgan from "morgan";
 import cors from "cors";
-// import productsRouter from "./routes/productsRouter.js";
+
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -33,7 +33,6 @@ app.use(
 );
 
 //set routes
-
 
 // app.use("/api/products", productsRouter);
 app.use("/api/users", userRoutes);
