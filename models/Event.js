@@ -3,7 +3,7 @@ const eventSchema = mongoose.Schema(
   {
     category: {
       type: String,
-      required: true,
+      // required: true,
     },
     budget: {
       type: Number,
