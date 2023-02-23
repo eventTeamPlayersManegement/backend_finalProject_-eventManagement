@@ -1,6 +1,6 @@
 import Ajv from "ajv";
-
-const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });//wir deklarieren eine neue Instanz von Ajv
+//wir deklarieren eine neue Instanz von Ajv
+const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
 
 // Wir können verschiedene Formate über ein Zusatzmodul prüfen.
 // So ist es bspw. möglich, eine E-Mail-Adresse oder URL zu validieren.

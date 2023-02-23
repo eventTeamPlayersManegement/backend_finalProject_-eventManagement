@@ -1,4 +1,5 @@
 export const postUser = {
+
   type: "object",
   additionalProperties: false,
   properties: {
@@ -9,3 +10,4 @@ export const postUser = {
     admin: { type: "boolean" },
   },
 };
+
