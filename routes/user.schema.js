@@ -5,7 +5,7 @@ export const postUser = {
         firstName: {type: "string"},
         lastName: {type: "string"},
         email: {type: "string", format: "email"},
-        password: {type: "string"},
+        password: {type: "string", format: "password"},
         admin: {type: "boolean"}
     }
 };
