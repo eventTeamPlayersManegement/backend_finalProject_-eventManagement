@@ -4,7 +4,6 @@ import token from "../lib/token.js";
 
 export const getAll = async (req, res, next) => {
   try {
-    console.log("ich bin da ");
     const result = await User.getAll();
     res.status(200).json({ result });
   } catch (error) {
@@ -13,6 +12,7 @@ export const getAll = async (req, res, next) => {
 };
 export const create = async (req, res, next) => {
   try {
+    console.log("hi!")
     const hashedPassword = await bcrypt.hash(req.body.password, 15);
     req.body.password = hashedPassword;
 
@@ -27,27 +27,23 @@ export const login = async (req, res, next) => {
       const passwordIsEqual = await bcrypt.compare(req.body.password, result.password);
       if(!passwordIsEqual)return res.status(401).end();
       if(passwordIsEqual){
-          const userToken = token.signToken({id: result._id})
-          const expDate = 1000 * 60 * 60 * 24 * 30 * 8
-          res.cookie("jwt", userToken, {
-              sameSite: "lax",
-              maxAge: expDate,
-              httpOnly: true
-          })
-          res.cookie("loggedIn", result._id.toString(), {
-              sameSite: "lax",
-              maxAge: expDate,
-              httpOnly: false
-          })
-
-          return res.status(201).json({message: "successfully logged in", id: result._id})
+        const userToken = token.signToken({id: result._id})
+        const expDate = 1000 * 60 * 60 * 24 * 30 * 8
+        res.cookie("jwt", userToken, {
+          sameSite: "lax",
+          maxAge: expDate,
+          httpOnly: true
+        })
+        res.cookie("loggedIn", result._id.toString(), {
+          sameSite: "lax",
+          maxAge: expDate,
+          httpOnly: false
+        })
+        return res.status(201).json({message: "successfully logged in", id: result._id})
       }
   } catch(error) {
       next(error);
   };
-
-  
-  
 };
 export const getOne = async (req, res, next) => {
   try {
