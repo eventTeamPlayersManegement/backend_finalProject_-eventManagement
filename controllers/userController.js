@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
 import * as User from "../models/User.js";
-import token from "../lib/token.js"
+import token from "../lib/token.js";
 
 export const getAll = async (req, res, next) => {
   try {
+    console.log("ich bin da ");
     const result = await User.getAll();
-    res.status(200).json(result);
+    res.status(200).json({ result });
   } catch (error) {
     next(error);
   }
@@ -21,14 +22,13 @@ export const create = async (req, res, next) => {
   }
 };
 export const login = async (req, res, next) => {
-   
   try {
       const result = await User.getOne({email: req.body.email});
       const passwordIsEqual = await bcrypt.compare(req.body.password, result.password);
       if(!passwordIsEqual)return res.status(401).end();
       if(passwordIsEqual){
           const userToken = token.signToken({id: result._id})
-          const expDate = 1000 * 60 * 60 * 24
+          const expDate = 1000 * 60 * 60 * 24 * 30 * 8
           res.cookie("jwt", userToken, {
               sameSite: "lax",
               maxAge: expDate,
@@ -46,6 +46,8 @@ export const login = async (req, res, next) => {
       next(error);
   };
 
+  
+  
 };
 export const getOne = async (req, res, next) => {
   try {
