@@ -41,14 +41,6 @@ app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
 app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
 
-/**
- * Routen, die unsere HTML Frontend Dateien ausgeben
- * Außerdem binden wir Middleware ein, die überprüft ob unser Nutzer eingeloggt ist
- */
-// app.get("/", authorize, (req, res) => res.sendFile(__dirname + "/views/index.html"))
-// app.get("/login", loggedIn, (req, res) => res.sendFile(__dirname + "/views/login.html"))
-// app.get("/register", loggedIn, (req, res) => res.sendFile(__dirname + "/views/register.html"))
-
 app.use("/:notfound", notFound);
 
 app.use(error);
