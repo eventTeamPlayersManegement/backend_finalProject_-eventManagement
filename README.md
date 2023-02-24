@@ -2,6 +2,8 @@
 ## run npm i
 ### create .env with 
               # URI=
-              #PORT=
+              # PORT=
+              # TOKEN_SECRET=
+              # TOKEN_EXPIRESIN=
 ## run npm start for- nodemon 
 ## run npm dev for -node
