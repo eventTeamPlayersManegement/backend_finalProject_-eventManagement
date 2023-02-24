@@ -5,5 +5,5 @@
               # PORT=
               # TOKEN_SECRET=
               # TOKEN_EXPIRESIN=
-## run npm start for- nodemon 
-## run npm dev for -node
+## run npm run dev  for- nodemon 
+## run npm start for -node
