@@ -1,4 +1,4 @@
-# backen_finalProject_-eventManagement
+# backend_finalProject_-eventManagement
 ## run npm i
 ### create .env with 
               # URI=
