@@ -12,9 +12,9 @@ const userRoutes = Router();
 // getAll> auth > admin
 userRoutes.route("/").get(auth, checkAdmin, user.getAll);
 
-userRoutes.route("/signup").post(validate(postUser), hashPWD, user.create);
-userRoutes.route("/signout").get(user.signout);
+userRoutes.route("/signup").post(user.create);
+// userRoutes.route("/signout").get(user.signout);
 // login> checkPWD > signCookie
-userRoutes.route("/signin").post(checkPWD, user.login);
+// userRoutes.route("/signin").post(checkPWD, user.login);
 
 export default userRoutes;

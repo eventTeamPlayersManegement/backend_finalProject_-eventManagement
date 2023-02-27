@@ -2,27 +2,27 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    firstName: {
+    name: {
       type: String,
-      required: true,
     },
-    lastName: {
+    nickname: {
       type: String,
-      // required: true,
     },
+
     email: {
       type: String,
-      unique: true,
+
       validate: {
         validator: (v) =>
           /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
         message: "Please enter a valid email address",
       },
-      required: true,
     },
-    password: {
+    email_verified: {
+      type: Boolean,
+    },
+    picture: {
       type: String,
-      required: true,
     },
     admin: {
       type: Boolean,

@@ -1,6 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
-dotenv.config();
+
 import "./lib/connecting.js";
 import morgan from "morgan";
 import cors from "cors";
