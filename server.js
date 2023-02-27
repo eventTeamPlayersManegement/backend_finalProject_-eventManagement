@@ -8,6 +8,7 @@ import cors from "cors";
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
 import userRoutes from "./routes/userRoutes.js";
+import photographerRoutes from "./routes/photographerRoutes.js";
 
 //Cookie
 import cookieParser from "cookie-parser";
@@ -35,6 +36,7 @@ app.use(
 //set routes
 
 app.use("/api/users", userRoutes);
+server.use("/api/photographer",  photographerRoutes);
 
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
