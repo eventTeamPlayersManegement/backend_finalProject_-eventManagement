@@ -4,7 +4,7 @@ export default async (req, res, next) => {
     if (!req.body.password || req.body.email) {
       next({ aprooved: false, message: "no email od password provided" });
     } else {
-      const hashdPWD = bcrypt.hash(req.body.password, 10);
+      const hashdPWD = await bcrypt.hash(req.body.password, 10);
       req.body.password = hashdPWD;
       next();
     }

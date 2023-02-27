@@ -3,7 +3,6 @@ const eventSchema = mongoose.Schema(
   {
     category: {
       type: String,
-      // required: true,
     },
     budget: {
       type: Number,
@@ -13,9 +12,14 @@ const eventSchema = mongoose.Schema(
       min: 2,
       max: 750,
     },
-    decoration: {},
-    entertainment: {},
-    location: {},
+    venue: [{ type: String /* city: "bla"*/ }],
+    decor: [],
+    entertainment: [],
+    yourLocation: [],
+    fotos: [],
+    catering: [],
+    rentAuto: [],
+    dreamstyle: [],
 
     user: {
       type: mongoose.Schema.Types.ObjectId,

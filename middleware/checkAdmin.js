@@ -5,7 +5,7 @@ export default async (req, res, next) => {
     if (searchUser.admin) {
       next();
     } else {
-      res.status(404).json({ aprooved: false, message: "you are not admin" });
+      res.status(403).json({ aprooved: false, message: "you are not admin" });
     }
   } catch (error) {
     next(error);

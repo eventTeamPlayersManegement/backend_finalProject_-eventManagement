@@ -34,7 +34,6 @@ app.use(
 
 //set routes
 
-// app.use("/api/products", productsRouter);
 app.use("/api/users", userRoutes);
 
 app.use(express.static("uploads"));
