@@ -36,7 +36,7 @@ app.use(
 //set routes
 
 app.use("/api/users", userRoutes);
-server.use("/api/photographer",  photographerRoutes);
+app.use("/api/photographer", photographerRoutes);
 
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));

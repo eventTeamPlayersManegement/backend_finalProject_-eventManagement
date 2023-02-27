@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const photographerSchema = mongoose.Schema({
     name: {
         type: String,
-        // required: true
+        required: true
     },
     // email: {
     //     type: String,
@@ -12,24 +12,9 @@ const photographerSchema = mongoose.Schema({
     //         message: "Please enter a valid email address"
     //     }
     // },
-  
-    // address:{
-    //     street: String,
-    //     houseNumber: {
-    //         type: String,
-    //         validate: {
-    //             validator: (v) => /^[0-9].*$/.test(v),
-    //             message: "Please insert some kind of number as House number"
-    //         }
-    //     },
-    //     zipCode: String,
-    //     city: String,
-    //     country: String,
-            
-    // },
     fotos: [
         {
-            name: {
+            title: {
                 type: String
             },
             description: {
@@ -72,8 +57,8 @@ export const create = async (document) => {
       };
     }
 };
-export const getOne = async (filter) => {
-    const photographer = await Photographer.findOne(filter);
+export const getOne = async (photographerId) => {
+    const photographer = await Photographer.findOne({_id: photographerId});
     return photographer;
 };
 export const replace = async (photographerId, data) => {

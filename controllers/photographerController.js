@@ -20,6 +20,7 @@ export const create = async (req, res, next) => {
 };
 
 export const getOne = async (req, res, next) => {
+    console.log(req.params)
     try {
         const result = await Photographer.getOne(req.params.photographerId);
         res.status(200).json(result);
