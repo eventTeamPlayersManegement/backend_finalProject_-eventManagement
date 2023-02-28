@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const restaurantSchema = mongoose.Schema({
+const entertainmentSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -8,7 +8,7 @@ const restaurantSchema = mongoose.Schema({
     description: {
         type: String
     },
-    capacity: {
+    price: {
         type: Number
     },
     // email: {
@@ -52,45 +52,45 @@ const restaurantSchema = mongoose.Schema({
   
     
 },{ timestamps: true },{ versionKey: false });
-const Restaurant = mongoose.model("Restaurant", restaurantSchema);
+const Entertainment = mongoose.model("Entertainment", entertainmentSchema);
 
 export const getAll = async () => {
-    const restaurant = await Restaurant.find();
-    return restaurant;
+    const entertainment = await Entertainment.find();
+    return entertainment;
 };
 export const create = async (document) => {
-    const newRestaurant = new Restaurant(document);
-    if (newRestaurant) {
+    const result = new Entertainment(document);
+    if (result) {
       return {
         aprooved: true,
-        data: await newRestaurant.save(),
-        message: "Restaurant created ",
+        data: await result.save(),
+        message: "Entertainment created ",
       };
     } else {
       return {
         aprooved: false,
-        message: "Restaurant failed to create",
+        message: "Entertainment failed to create",
       };
     }
 };
-export const getOne = async (restaurantId) => {
-    const restaurant = await Restaurant.findOne({_id: restaurantId});
-    return restaurant;
+export const getOne = async (entertainmentId) => {
+    const entertainment = await Entertainment.findOne({_id: entertainmentId});
+    return entertainment;
 };
-export const replace = async (restaurantId, data) => {
-    const restaurant = await Restaurant.findOneAndReplace({_id: restaurantId}, data, {returnDocument: "after", runValidators: true},);
+export const replace = async (entertainmentId, data) => {
+    const entertainment = await Entertainment.findOneAndReplace({_id: entertainmentId}, data, {returnDocument: "after", runValidators: true},);
 
-    return restaurant;
+    return entertainment;
 };
-export const update = async (restaurantId, data) => {
-    const restaurant = await Restaurant.findByIdAndUpdate(restaurantId, data, {new: true, runValidators: true});
+export const update = async (entertainmentId, data) => {
+    const entertainment = await Entertainment.findByIdAndUpdate(entertainmentId, data, {new: true, runValidators: true});
 
-    return restaurant;
+    return entertainment;
 };
-export const deleteOne = async (restaurantId) => {
-    const restaurant = await Restaurant.findByIdAndDelete(restaurantId)
+export const deleteOne = async (entertainmentId) => {
+    const entertainment = await Entertainment.findByIdAndDelete(entertainmentId)
 
-    return restaurant;
+    return entertainment;
 };
 
-export default Restaurant
+export default Entertainment;
