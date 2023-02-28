@@ -78,7 +78,7 @@ export const getOne = async (rentautoId) => {
     return rentauto;
 };
 export const replace = async (rentautoId, data) => {
-    const rentauto = await Rentauto.findOneAndReplace({_id: rentautoId}, data, {returnDocument: "after", runValidators: true},);
+    const rentauto = await Rentauto.findOneAndReplace({_id: rentautoId}, data, {returnDocument: "after", runValidators: true});
 
     return rentauto;
 };

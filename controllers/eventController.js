@@ -1,4 +1,4 @@
-import * as Event from "../models/event.js";
+import * as Event from "../models/Event.js";
 
 
 export const getAll = async (req, res, next) => {

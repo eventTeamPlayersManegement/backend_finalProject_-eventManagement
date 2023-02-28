@@ -78,7 +78,7 @@ export const getOne = async (entertainmentId) => {
     return entertainment;
 };
 export const replace = async (entertainmentId, data) => {
-    const entertainment = await Entertainment.findOneAndReplace({_id: entertainmentId}, data, {returnDocument: "after", runValidators: true},);
+    const entertainment = await Entertainment.findOneAndReplace({_id: entertainmentId}, data, {returnDocument: "after", runValidators: true});
 
     return entertainment;
 };

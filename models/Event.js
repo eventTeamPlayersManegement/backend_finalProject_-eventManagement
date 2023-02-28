@@ -72,7 +72,7 @@ export const getOne = async (eventId) => {
   return event;
 };
 export const replace = async (eventId, data) => {
-  const event = await Event.findOneAndReplace({_id: eventId}, data, {returnDocument: "after", runValidators: true},);
+  const event = await Event.findOneAndReplace({_id: eventId}, data, {returnDocument: "after", runValidators: true});
 
   return event;
 };
