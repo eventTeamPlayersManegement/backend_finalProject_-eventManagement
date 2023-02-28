@@ -8,6 +8,9 @@ const restaurantSchema = mongoose.Schema({
     description: {
         type: String
     },
+    capacity: {
+        type: Number
+    },
     // email: {
     //     type: String,
     //     validate: {
@@ -15,6 +18,19 @@ const restaurantSchema = mongoose.Schema({
     //         message: "Please enter a valid email address"
     //     }
     // },
+    address:{
+        street: String,
+        houseNumber: {
+        type: String,
+        validate: {
+                validator: (v) => /^[0-9].*$/.test(v),
+                message: "Please insert some kind of number as House number"
+            }
+        },
+        zipCode: String,
+        city: String,
+        country: String,      
+    },
     fotos: [
         {
             title: {
@@ -34,20 +50,7 @@ const restaurantSchema = mongoose.Schema({
             },
         }
     ],
-    address:{
-        street: String,
-        houseNumber: {
-        type: String,
-        validate: {
-                validator: (v) => /^[0-9].*$/.test(v),
-                message: "Please insert some kind of number as House number"
-            }
-        },
-        zipCode: String,
-        city: String,
-        required: true,
-        country: String,      
-    },
+  
     
 },{ timestamps: true },{ versionKey: false });
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
