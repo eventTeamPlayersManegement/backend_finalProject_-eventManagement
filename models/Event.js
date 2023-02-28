@@ -23,7 +23,12 @@ const eventSchema = mongoose.Schema(
     yourLocation: [],
     fotos: [],
     catering: [],
-    rentAuto: [],
+    rentAuto: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rentauto"
+      }
+    ],
     dreamstyle: [],
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
