@@ -10,6 +10,7 @@ import notFound from "./middleware/notFound.js";
 import userRoutes from "./routes/userRoutes.js";
 import photographerRoutes from "./routes/photographerRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
+import entertainmentRoutes from "./routes/entertainmentRoutes.js";
 
 //Cookie
 import cookieParser from "cookie-parser";
@@ -39,6 +40,7 @@ app.use(
 app.use("/api/users", userRoutes);
 app.use("/api/photographer", photographerRoutes);
 app.use("/api/restaurant", restaurantRoutes);
+app.use("/api/entertainment", entertainmentRoutes);
 
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));

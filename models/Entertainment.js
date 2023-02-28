@@ -59,11 +59,11 @@ export const getAll = async () => {
     return entertainment;
 };
 export const create = async (document) => {
-    const result = new Entertainment(document);
-    if (result) {
+    const newEntertainment = new Entertainment(document);
+    if (newEntertainment) {
       return {
         aprooved: true,
-        data: await result.save(),
+        data: await newEntertainment.save(),
         message: "Entertainment created ",
       };
     } else {
