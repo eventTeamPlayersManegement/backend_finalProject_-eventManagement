@@ -20,6 +20,10 @@ const eventSchema = mongoose.Schema(
     catering: [],
     rentAuto: [],
     dreamstyle: [],
+    restaurant: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Restaurant"
+    },
     photographer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Photographer"
