@@ -7,7 +7,11 @@ import cors from "cors";
 
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
-import userRoutes from "./routes/userRoutes.js";
+import eventRoutes from "./routes/eventRoutes.js";
+import photographerRoutes from "./routes/photographerRoutes.js";
+import restaurantRoutes from "./routes/restaurantRoutes.js";
+import entertainmentRoutes from "./routes/entertainmentRoutes.js";
+import rentautoRoutes from "./routes/rentautoRoutes.js";
 
 //Cookie
 import cookieParser from "cookie-parser";
@@ -34,7 +38,11 @@ app.use(
 
 //set routes
 
-app.use("/api/users", userRoutes);
+app.use("/api/event", eventRoutes);
+app.use("/api/photographer", photographerRoutes);
+app.use("/api/restaurant", restaurantRoutes);
+app.use("/api/entertainment", entertainmentRoutes);
+app.use("/api/rentauto", rentautoRoutes);
 
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
