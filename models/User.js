@@ -28,6 +28,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    sub: {
+      type: String,
+      required: true,
+    },
     events: [
       {
         type: mongoose.Schema.Types.ObjectId,
