@@ -1,36 +1,30 @@
 import mongoose from "mongoose"
 
 const rentautoSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
-    // email: {
-    //     type: String,
-    //     validate: {
-    //         validator: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
-    //         message: "Please enter a valid email address"
-    //     }
-    // },
-    address:{
-        street: String,
-        houseNumber: {
-        type: String,
-        validate: {
-                validator: (v) => /^[0-9].*$/.test(v),
-                message: "Please insert some kind of number as House number"
-            }
+    description: String,
+    model: String,
+    jahr: Number,
+    price: Number,
+    provider: {
+        name: {
+            type: String,
+            // required: true
         },
-        zipCode: String,
-        city: String,
-        country: String,      
-    },
+        address:{
+            street: String,
+            houseNumber: {
+            type: String,
+            validate: {
+                    validator: (v) => /^[0-9].*$/.test(v),
+                    message: "Please insert some kind of number as House number"
+                }
+            },
+            zipCode: String,
+            city: String,
+            country: String,      
+        },
+
+    },    
     fotos: [
         {
             title: {
@@ -49,8 +43,8 @@ const rentautoSchema = mongoose.Schema({
             },
         }
     ],
-  
-    
+   
+
 },{ timestamps: true },{ versionKey: false });
 const Rentauto = mongoose.model("Rentauto", rentautoSchema);
 
@@ -64,12 +58,12 @@ export const create = async (document) => {
       return {
         aprooved: true,
         data: await newrentauto.save(),
-        message: "Rent Auto created ",
+        message: "Rent auto created ",
       };
     } else {
       return {
         aprooved: false,
-        message: "Rent Auto failed to create",
+        message: "Rent auto failed to create",
       };
     }
 };
