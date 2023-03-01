@@ -4,6 +4,7 @@ const eventSchema = mongoose.Schema(
     category: {
       type: String,
     },
+    date: {},
     budget: {
       type: Number,
     },
@@ -14,6 +15,7 @@ const eventSchema = mongoose.Schema(
     },
     venue: [{ type: String /* city: "bla"*/ }],
     decor: [],
+
     entertainment: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -22,6 +24,7 @@ const eventSchema = mongoose.Schema(
     ],
     yourLocation: [],
     fotos: [],
+
     catering: [],
     rentAuto: [
       {
