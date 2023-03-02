@@ -18,6 +18,7 @@ import cookieParser from "cookie-parser";
 //Die beiden imports benötigen wir, damit wir die html Dateien finden
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import suppliersRoutes from "./routes/suppliersRoute.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,7 +44,7 @@ app.use("/api/photographer", photographerRoutes);
 app.use("/api/restaurant", restaurantRoutes);
 app.use("/api/entertainment", entertainmentRoutes);
 app.use("/api/rentauto", rentautoRoutes);
-
+app.use("/api/suppliers", suppliersRoutes);
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
 app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
