@@ -1,7 +1,9 @@
-# backen_finalProject_-eventManagement
+# backend_finalProject_-eventManagement
 ## run npm i
 ### create .env with 
               # URI=
-              #PORT=
-## run npm start for- nodemon 
-## run npm dev for -node
+              # PORT=
+              # TOKEN_SECRET=
+              # TOKEN_EXPIRESIN=
+## run npm run dev  for- nodemon 
+## run npm start for -node

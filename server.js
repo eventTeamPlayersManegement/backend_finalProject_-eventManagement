@@ -6,21 +6,29 @@ import morgan from "morgan";
 import cors from "cors";
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
-import userRoutes from "./routes/userRoutes.js";
-import { auth } from "express-openid-connect";
+// import userRoutes from "./routes/userRoutes.js";
+import pkg from "express-openid-connect";
 import jwt from "jsonwebtoken";
 import * as User from "./models/User.js";
+import eventRoutes from "./routes/eventRoutes.js";
+import photographerRoutes from "./routes/photographerRoutes.js";
+import restaurantRoutes from "./routes/restaurantRoutes.js";
+import entertainmentRoutes from "./routes/entertainmentRoutes.js";
+import rentautoRoutes from "./routes/rentautoRoutes.js";
+
 //Cookie
 import cookieParser from "cookie-parser";
 //Die beiden imports benötigen wir, damit wir die html Dateien finden
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import suppliersRoutes from "./routes/suppliersRoute.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PORT = process.env.PORT;
 const app = express();
 
+const { auth, requiresAuth } = pkg;
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -42,26 +50,19 @@ app.use(
   })
 );
 
-//set routes
-app.get("/", async (req, res) => {
-  console.log(req.oidc.idToken);
-  const token = jwt.decode(req.oidc.idToken, process.env.SECRET);
-  console.log(token);
-  res.redirect("http://localhost:5173");
-
-  // const user = await User.getOne({ sub: req.oidc.sub });
-  // if (user) {
-  //   res.redirect("http://localhost:5173");
-  // } else if (!user && req.oidc.isAuthenticated()) {
-  //   await User.create(req.oidc.user);
-  //   res.redirect("http://localhost:5173");
-  // } else {
-  //   res.redirect("http://localhost:5173");
-  // }
+app.get("/", function (req, res, next) {
+  res.status(301).redirect("http://localhost:5173");
+});
+app.get("/profile", requiresAuth(), function (req, res, next) {
+  res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });
 
-app.use("/api/users", userRoutes);
-
+app.use("/api/event", eventRoutes);
+app.use("/api/photographer", photographerRoutes);
+app.use("/api/restaurant", restaurantRoutes);
+app.use("/api/entertainment", entertainmentRoutes);
+app.use("/api/rentauto", rentautoRoutes);
+app.use("/api/suppliers", suppliersRoutes);
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
 // app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
