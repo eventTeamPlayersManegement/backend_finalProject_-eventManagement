@@ -1,7 +1,7 @@
 import * as user from "../models/User.js";
 export default async (req, res, next) => {
   try {
-    const searchUser = await user.getOneById(req.userId);
+    const searchUser = await user.getOneById(req.params.id);
     if (searchUser.admin) {
       next();
     } else {

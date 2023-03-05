@@ -6,10 +6,7 @@ import morgan from "morgan";
 import cors from "cors";
 import error from "./middleware/error.js";
 import notFound from "./middleware/notFound.js";
-// import userRoutes from "./routes/userRoutes.js";
 import pkg from "express-openid-connect";
-import jwt from "jsonwebtoken";
-import * as User from "./models/User.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import photographerRoutes from "./routes/photographerRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
@@ -22,6 +19,8 @@ import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import suppliersRoutes from "./routes/suppliersRoute.js";
+import userRouter from "./routes/userRouter.js";
+import chatRouter from "./routes/chatRouter.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -57,6 +56,8 @@ app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });
 
+app.use("/api/users", userRouter);
+app.use("/api/chat", chatRouter);
 app.use("/api/event", eventRoutes);
 app.use("/api/photographer", photographerRoutes);
 app.use("/api/restaurant", restaurantRoutes);
