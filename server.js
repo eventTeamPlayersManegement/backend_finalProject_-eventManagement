@@ -67,7 +67,7 @@ app.use("/api/entertainment", entertainmentRoutes);
 app.use("/api/rentauto", rentautoRoutes);
 app.use("/api/suppliers", suppliersRoutes);
 app.use(express.static("uploads"));
-app.use("/", express.static("./dist"));
+// app.use("/", express.static("./dist"));
 // app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
 
 app.use("/:notfound", notFound);
