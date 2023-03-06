@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
-const chatSchema = mongoose.Schema(
+import { updateOneUser } from "./User.js";
+
+const chatSchema = new mongoose.Schema(
   {
     writer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Conversation",
     },
     message: {
       type: String,
@@ -18,11 +20,12 @@ const Chat = mongoose.model("Chat", chatSchema);
 
 export const createOneChat = async (document) => {
   const newChat = new Chat(document);
+
   if (newChat) {
     return {
       aprooved: true,
       data: await newChat.save(),
-      message: " Chat created ",
+      message: "Chat created ",
     };
   } else {
     return {
@@ -31,18 +34,18 @@ export const createOneChat = async (document) => {
     };
   }
 };
-export const getOneChat = async (chatId) => {
-  const chat = await Chat.findById(chatId).populate("writer");
+export const getOneChat = async (id) => {
+  const chat = await Chat.findById(id).populate("writer");
   return chat;
 };
 
-export const updatOneChat = async (chatId, data) => {
-  const chat = await Chat.findByIdAndUpdate(chatId, data);
+export const updatOneChat = async (id, data) => {
+  const chat = await Chat.findByIdAndUpdate(id, data);
 
   return chat;
 };
-export const deleteOneChat = async (chatId) => {
-  const chat = await Chat.findByIdAndDelete(chatId);
+export const deleteOneChat = async (id) => {
+  const chat = await Chat.findByIdAndDelete(id);
 
   return chat;
 };

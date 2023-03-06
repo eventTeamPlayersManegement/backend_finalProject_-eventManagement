@@ -21,6 +21,7 @@ import { dirname } from "path";
 import suppliersRoutes from "./routes/suppliersRoute.js";
 import userRouter from "./routes/userRouter.js";
 import chatRouter from "./routes/chatRouter.js";
+import conversationRouter from "./routes/conversationRouter.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,6 +59,7 @@ app.get("/profile", requiresAuth(), function (req, res, next) {
 
 app.use("/api/users", userRouter);
 app.use("/api/chat", chatRouter);
+app.use("/api/conversation", conversationRouter);
 app.use("/api/event", eventRoutes);
 app.use("/api/photographer", photographerRoutes);
 app.use("/api/restaurant", restaurantRoutes);

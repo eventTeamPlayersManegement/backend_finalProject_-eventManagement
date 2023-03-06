@@ -1,7 +1,6 @@
-import { safeStringify } from "ajv/dist/compile/codegen/code.js";
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     admin: {
       type: Boolean,
@@ -12,10 +11,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    chats: [
+    conversations: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Chat",
+        ref: "Conversation",
       },
     ],
   },
@@ -40,18 +39,19 @@ export const createOneUser = async (document) => {
   }
 };
 export const getOneUserSub = async (sub) => {
-  const user = await User.findOne({ sub: sub }).populate("chats");
+  const user = await User.findOne({ sub: sub }).populate("conversations");
   return user;
 };
 
 export const getOneUser = async (id) => {
-  const user = await User.findById(id).populate("chats");
+  const user = await User.findById(id).populate("conversations");
   return user;
 };
 
 export const updateOneUser = async (id, data) => {
-  const user = await User.findByIdAndUpdate(id, { $push: { ...data } });
-
+  console.log(data);
+  const user = await User.findOneAndUpdate({ sub: id }, { $push: { ...data } });
+  console.log(user);
   return user;
 };
 export const deleteOne = async (id) => {
