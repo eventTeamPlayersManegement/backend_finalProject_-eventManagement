@@ -46,12 +46,12 @@ app.use(morgan("dev"));
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "https://event-management-final-project-iota.vercel.app/",
   })
 );
 
 app.get("/", function (req, res, next) {
-  res.status(301).redirect("http://localhost:5173");
+  res.status(301).redirect("https://event-management-final-project-iota.vercel.app/");
 });
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
