@@ -57,7 +57,7 @@ export const deleteOneConversation = async (id) => {
   return conversation;
 };
 export const getAllConversation = async () => {
-  const conversation = await Conversation.find();
+  const conversation = await Conversation.find().populate("chats.writer");
 
   return conversation;
 };
