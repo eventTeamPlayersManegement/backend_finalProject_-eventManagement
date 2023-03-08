@@ -45,7 +45,7 @@ const config = {
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
-
+app.use(auth(config));
 // app.use(
 //   cors({
 //     credentials: true,
@@ -56,9 +56,8 @@ app.use(morgan("dev"));
 app.get("/", function (req, res, next) {
   // res.status(200).send(req.oidc.isAuthenticated() ? "login" : "logout");
   res.redirect("http://localhost:5173");
-
 });
-app.use(auth(config));
+
 // app.get("/login", function (req, res, next) {
 //   res.oidc.login({
 //     returnTo: "http://localhost:5173",
