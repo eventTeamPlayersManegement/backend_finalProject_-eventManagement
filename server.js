@@ -20,7 +20,6 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import suppliersRoutes from "./routes/suppliersRoute.js";
 import userRouter from "./routes/userRouter.js";
-import chatRouter from "./routes/chatRouter.js";
 import conversationRouter from "./routes/conversationRouter.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -36,29 +35,43 @@ const config = {
   baseURL: process.env.BASEURL,
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUERBASEURL,
+  // routes: {
+  //   login: false,
+  //   postLogoutRedirect: "/logout",
+  // },
 };
 
 //set middlewares
-app.use(auth(config));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(
-  cors({
-    credentials: true,
-    origin: "https://event-management-final-project-iota.vercel.app/",
-  })
-);
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: "http://localhost:5173",
+//   })
+// );
 
 app.get("/", function (req, res, next) {
-  res.status(301).redirect("https://event-management-final-project-iota.vercel.app/");
+  // res.status(200).send(req.oidc.isAuthenticated() ? "login" : "logout");
+  res.redirect("http://localhost:5173");
+
 });
+app.use(auth(config));
+// app.get("/login", function (req, res, next) {
+//   res.oidc.login({
+//     returnTo: "http://localhost:5173",
+//   });
+// });
+// app.get("/logout", function (req, res, next) {
+//   res.send("bye");
+// });
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });
 
 app.use("/api/users", userRouter);
-app.use("/api/chat", chatRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/event", eventRoutes);
 app.use("/api/photographer", photographerRoutes);

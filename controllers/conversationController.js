@@ -11,7 +11,7 @@ export const getOneConversation = async (req, res, next) => {
 export const getAllConversation = async (req, res, next) => {
   try {
     const result = await Conversation.getAllConversation();
-    res.status(200).json({ conversations: result });
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
