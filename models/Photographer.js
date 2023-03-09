@@ -12,6 +12,29 @@ const photographerSchema = mongoose.Schema({
     //         message: "Please enter a valid email address"
     //     }
     // },
+    profilepicture: {
+        type: String,
+        validate: {
+            validator: (v) => {
+                const val = v.startsWith("http") || v.startsWith("www")
+                return val
+            },
+            message: "Please write a valid URL"
+        },
+        required: true,
+    },
+    equipment: {
+        type: String,
+        validate: {
+            validator: (v) => {
+                const val = v.startsWith("http") || v.startsWith("www")
+                return val
+            },
+            message: "Please write a valid URL"
+        },
+        required: true,
+
+    },
     fotos: [
         {
             title: {
