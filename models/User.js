@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema(
         ref: "Conversation",
       },
     ],
+    events: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
   { timestamps: true },
   { versionKey: false }
@@ -50,7 +56,7 @@ export const getOneUser = async (id) => {
 
 export const updateOneUser = async (id, data) => {
   console.log(data);
-  const user = await User.findOneAndUpdate({ sub: id }, { $push: { ...data } });
+  const user = await User.findByIdAndUpdate(id, { $push: { ...data } });
   console.log(user);
   return user;
 };
