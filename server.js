@@ -55,7 +55,7 @@ app.use(auth(config));
 
 app.get("/", function (req, res, next) {
   // res.status(200).send(req.oidc.isAuthenticated() ? "login" : "logout");
-  res.redirect("http://localhost:5173");
+  res.redirect("http://116.203.202.181");
 });
 
 // app.get("/login", function (req, res, next) {
