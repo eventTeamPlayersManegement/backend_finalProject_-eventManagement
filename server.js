@@ -35,10 +35,6 @@ const config = {
   baseURL: process.env.BASEURL,
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUERBASEURL,
-  // routes: {
-  //   login: false,
-  //   postLogoutRedirect: "/logout",
-  // },
 };
 
 //set middlewares
@@ -58,14 +54,6 @@ app.get("/", function (req, res, next) {
   res.redirect("http://localhost:5173");
 });
 
-// app.get("/login", function (req, res, next) {
-//   res.oidc.login({
-//     returnTo: "http://localhost:5173",
-//   });
-// });
-// app.get("/logout", function (req, res, next) {
-//   res.send("bye");
-// });
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });

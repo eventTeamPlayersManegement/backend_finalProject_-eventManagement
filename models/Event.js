@@ -19,8 +19,8 @@ const eventSchema = mongoose.Schema(
     entertainment: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Entertainment"
-      }
+        ref: "Entertainment",
+      },
     ],
     yourLocation: [],
     fotos: [],
@@ -29,21 +29,17 @@ const eventSchema = mongoose.Schema(
     rentAuto: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Rentauto"
-      }
+        ref: "Rentauto",
+      },
     ],
     dreamstyle: [],
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Restaurant"
+      ref: "Restaurant",
     },
     photographer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Photographer"
-    },
-
-    user: {
-      type: String
+      ref: "Photographer",
     },
   },
   { versionKey: false },
@@ -52,7 +48,7 @@ const eventSchema = mongoose.Schema(
 const Event = mongoose.model("Event", eventSchema);
 
 export const getAll = async (document) => {
-  const event = await Event.find({_id: document});
+  const event = await Event.find({ _id: document });
   return event;
 };
 export const create = async (document) => {
@@ -71,21 +67,27 @@ export const create = async (document) => {
   }
 };
 export const getOne = async (eventId) => {
-  const event = await Event.findOne({_id: eventId});
+  const event = await Event.findOne({ _id: eventId });
   return event;
 };
 export const replace = async (eventId, data) => {
-  const event = await Event.findOneAndReplace({_id: eventId}, data, {returnDocument: "after", runValidators: true});
+  const event = await Event.findOneAndReplace({ _id: eventId }, data, {
+    returnDocument: "after",
+    runValidators: true,
+  });
 
   return event;
 };
 export const update = async (eventId, data) => {
-  const event = await Event.findByIdAndUpdate(eventId, data, {new: true, runValidators: true});
+  const event = await Event.findByIdAndUpdate(eventId, data, {
+    new: true,
+    runValidators: true,
+  });
 
   return event;
 };
 export const deleteOne = async (eventId) => {
-  const event = await Event.findByIdAndDelete(eventId)
+  const event = await Event.findByIdAndDelete(eventId);
 
   return event;
 };
