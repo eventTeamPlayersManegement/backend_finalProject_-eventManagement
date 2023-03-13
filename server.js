@@ -54,6 +54,7 @@ app.get("/", function (req, res, next) {
   res.redirect("http://localhost:5173");
 });
 
+
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });
