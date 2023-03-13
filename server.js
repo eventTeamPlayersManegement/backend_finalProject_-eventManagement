@@ -12,6 +12,7 @@ import photographerRoutes from "./routes/photographerRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
 import entertainmentRoutes from "./routes/entertainmentRoutes.js";
 import rentautoRoutes from "./routes/rentautoRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 
 //Cookie
 import cookieParser from "cookie-parser";
@@ -54,7 +55,6 @@ app.use(auth(config));
 //   res.redirect("http://localhost:5173");
 // });
 
-
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
 });
@@ -67,6 +67,7 @@ app.use("/api/restaurant", restaurantRoutes);
 app.use("/api/entertainment", entertainmentRoutes);
 app.use("/api/rentauto", rentautoRoutes);
 app.use("/api/suppliers", suppliersRoutes);
+app.use("/api/message", messageRoutes);
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
 app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
