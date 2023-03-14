@@ -77,9 +77,16 @@ export const create = async (document) => {
       };
     }
 };
-export const cityFilter = async () => {
-   
-    const result = await Restaurant.find({"address.city":"Berlin", capacity: {$gte:80}});
+export const cityFilterBerlin = async () => {
+
+    const result = await Restaurant.find({"address.city":"Berlin", capacity: {$gte:60}});
+    // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
+    return result;
+}
+export const cityFilterMunchen = async () => {
+
+    const result = await Restaurant.find({"address.city":"Munchen", capacity: {$gte:90}});
+    // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
     return result;
 }
 export const getOne = async (restaurantId) => {
