@@ -10,9 +10,9 @@ export const create = async (req, res, next) => {
 
     const msg = {
       to: email,
-      from: "vasothom@hotmail.com",
+      from: process.env.MY_EMAIl,
       subject: "Event Elite",
-      text: `Hello ${name},\n\nThank you for contacting us! Here is a copy of your message:\n\n${message}. We will contact you as soon as possible.\n\nBest regards,\nThe Event Elite Team`,
+      text: `Hello ${name},\n\nThank you for contacting us!\n Here is a copy of your message:\n\n${message}.\n \n \n We will contact you as soon as possible.\n\nBest regards,\nThe Event Elite Team`,
     };
     sgMail
       .send(msg)
