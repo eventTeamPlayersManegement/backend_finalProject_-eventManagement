@@ -73,6 +73,11 @@ export const create = async (document) => {
       };
     }
 };
+export const cityFilter = async () => {
+   
+    const result = await Restaurant.find({"address.city":"Berlin", capacity: {$gte:80}});
+    return result;
+}
 export const getOne = async (restaurantId) => {
     const restaurant = await Restaurant.findOne({_id: restaurantId});
     return restaurant;
