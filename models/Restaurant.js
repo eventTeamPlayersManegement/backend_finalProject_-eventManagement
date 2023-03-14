@@ -8,8 +8,12 @@ const restaurantSchema = mongoose.Schema({
     description: {
         type: String
     },
-    capacity: {
-        type: Number
+    capacitymax: {
+        type: Number,
+       
+    },
+    capacitymin: {
+        type:Number
     },
     // email: {
     //     type: String,
