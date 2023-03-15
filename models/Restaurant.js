@@ -8,6 +8,9 @@ const restaurantSchema = mongoose.Schema({
     description: {
         type: String
     },
+    capacity : {
+        type: Number
+    },
     capacitymax: {
         type: Number,
        
@@ -87,7 +90,7 @@ export const cityFilter = async (req) => {
     //     { $group: { _id: '$price', products: { $push: '$name' } } },
     //     { $match: { 'products.1': { $exists: true } } }
     //   ]
-    const result = await Restaurant.find({ 'address.city': req.query.city, "capacity": { $gte: +req.query.capacity }}).exec();
+    const result = await Restaurant.find({ 'address.city': req.query.city, "capacity": { $gte: +req.query.capacity }});
     return result;
 }
 export const getOne = async (restaurantId) => {
