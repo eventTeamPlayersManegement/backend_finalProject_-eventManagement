@@ -32,3 +32,7 @@ export const create = async (document) => {
     };
   }
 };
+export const getAll = async () => {
+  const messages = await Message.find();
+  return messages;
+};
