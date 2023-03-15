@@ -3,6 +3,11 @@ import { updateOneUser } from "./User.js";
 
 const conversationSchema = new mongoose.Schema(
   {
+    conversationsWriter: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
+
     chats: [
       {
         writer: {
@@ -23,7 +28,7 @@ export const createOneConversation = async (document) => {
   const newConversation = new Conversation(document);
 
   if (newConversation) {
-    await updateOneUser(document.id, {
+    await updateOneUser(document.conversationsWriter, {
       conversations: newConversation._id,
     });
     return {
@@ -39,7 +44,9 @@ export const createOneConversation = async (document) => {
   }
 };
 export const getOneConversation = async (id) => {
-  const conversation = await Conversation.findById(id).populate("chats.writer");
+  const conversation = await Conversation.findById(id)
+    .populate("chats.writer")
+    .populate("conversationsWriter");
   return conversation;
 };
 
@@ -57,7 +64,9 @@ export const deleteOneConversation = async (id) => {
   return conversation;
 };
 export const getAllConversation = async () => {
-  const conversation = await Conversation.find().populate("chats.writer");
+  const conversation = await Conversation.find()
+    .populate("chats.writer")
+    .populate("conversationsWriter");
 
   return conversation;
 };
