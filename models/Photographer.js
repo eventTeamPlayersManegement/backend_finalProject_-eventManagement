@@ -10,26 +10,19 @@ const photographerSchema = mongoose.Schema(
       type: String,
     },
     avatar: String,
+    description: String,
     fotos: [
       {
-        title: {
-          type: String,
-        },
-        description: {
-          type: String,
-        },
-        url: {
-          type: String,
-          validate: {
-            validator: (v) => {
-              const val = v.startsWith("http") || v.startsWith("www");
-              return val;
-            },
-            message: "Please write a valid URL",
+        type: String,
+        validate: {
+          validator: (v) => {
+            const val = v.startsWith("http") || v.startsWith("www");
+            return val;
           },
-          // unique: true,
-          required: true,
+          message: "Please write a valid URL",
         },
+        // unique: true,
+        // required: true,
       },
     ],
     location: String,
