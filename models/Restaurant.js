@@ -77,16 +77,17 @@ export const create = async (document) => {
       };
     }
 };
-export const cityFilterBerlin = async () => {
-
-    const result = await Restaurant.find({"address.city":"Berlin", capacity: {$gte:60}});
-    // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
-    return result;
-}
-export const cityFilterMunchen = async () => {
-
-    const result = await Restaurant.find({"address.city":"Munchen", capacity: {$gte:90}});
-    // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
+export const cityFilter = async (req) => {
+    console.log("capacity", +req.query.capacity)
+    // const result = await Restaurant.aggregate([
+    //     {$group: {"_id": "$address.city"}}, 
+    //     {$match: {capacity: {$gte: req.query.capacity}}}
+    // ]);
+    // Product.aggregate([
+    //     { $group: { _id: '$price', products: { $push: '$name' } } },
+    //     { $match: { 'products.1': { $exists: true } } }
+    //   ]
+    const result = await Restaurant.find({ 'address.city': req.query.city, "capacity": { $gte: +req.query.capacity }}).exec();
     return result;
 }
 export const getOne = async (restaurantId) => {

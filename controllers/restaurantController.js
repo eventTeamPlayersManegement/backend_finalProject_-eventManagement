@@ -3,14 +3,8 @@ import * as Restaurant from "../models/Restaurant.js";
 
 export const getAll = async (req, res, next) => {
     try {
-        if(req.query.city=="Berlin"){
-            const result = await Restaurant.cityFilterBerlin();
-            console.log(result)
-            return res.status(200).json(result);
-        }
-        if(req.query.city=="Munchen"){
-            const result = await Restaurant.cityFilterMunchen();
-            console.log(result)
+        if(req.query.city == "Berlin" || req.query.city == "Munchen" ){
+            const result = await Restaurant.cityFilter(req);
             return res.status(200).json(result);
         }
         const result = await Restaurant.getAll();
