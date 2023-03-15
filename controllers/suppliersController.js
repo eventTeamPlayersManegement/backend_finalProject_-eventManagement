@@ -10,25 +10,34 @@ export const getRandom = async (req, res, next) => {
   try {
     let suppliersArr = [];
     const resultRes = await Restaurant.getAll();
-    suppliersArr = [
-      ...suppliersArr,
-      ...resultRes[random(resultRes.length)].fotos,
-    ];
+    console.log(resultRes + "test");
+    if (resultRes.length) {
+      suppliersArr = [
+        ...suppliersArr,
+        ...resultRes[random(resultRes.length)].fotos,
+      ];
+    }
     const resultPhoto = await Photographer.getAll();
-    suppliersArr = [
-      ...suppliersArr,
-      ...resultPhoto[random(resultPhoto.length)].fotos,
-    ];
+    if (resultPhoto.length) {
+      suppliersArr = [
+        ...suppliersArr,
+        ...resultPhoto[random(resultPhoto.length)].fotos,
+      ];
+    }
     const resultAuto = await Rentauto.getAll();
-    suppliersArr = [
-      ...suppliersArr,
-      ...resultAuto[random(resultAuto.length)].fotos,
-    ];
+    if (resultAuto.length) {
+      suppliersArr = [
+        ...suppliersArr,
+        ...resultAuto[random(resultAuto.length)].fotos,
+      ];
+    }
     const resultEnt = await Entertainment.getAll();
-    suppliersArr = [
-      ...suppliersArr,
-      ...resultEnt[random(resultEnt.length)].fotos,
-    ];
+    if (resultEnt.length) {
+      suppliersArr = [
+        ...suppliersArr,
+        ...resultEnt[random(resultEnt.length)].fotos,
+      ];
+    }
     res.status(200).json(suppliersArr);
   } catch (error) {
     next(error);

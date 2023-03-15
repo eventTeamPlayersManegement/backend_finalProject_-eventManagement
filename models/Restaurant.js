@@ -6,6 +6,7 @@ const restaurantSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    avatar: String,
     description: {
       type: String,
     },
@@ -15,7 +16,7 @@ const restaurantSchema = mongoose.Schema(
     capacitymin: {
       type: String,
     },
-
+    price: String,
     street: String,
     houseNumber: {
       type: String,
@@ -56,27 +57,16 @@ export const create = async (document) => {
     };
   }
 };
-export const findOnCity = async (city) => {
-  const result = await Restaurant.find({ city });
-  // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
+export const findOnCity = async (city, capacity) => {
+  const result = await Restaurant.find({
+    city,
+    capacitymin: { $gte: capacity },
+    capacitymax: { $lte: capacity },
+  });
+
   return result;
 };
-// export const cityFilterBerlin = async () => {
-//   const result = await Restaurant.find({
-//     "address.city": "Berlin",
-//     capacity: { $gte: 60 },
-//   });
-//   // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
-//   return result;
-// };
-// export const cityFilterMunchen = async () => {
-//   const result = await Restaurant.find({
-//     "address.city": "Munchen",
-//     capacity: { $gte: 90 },
-//   });
-//   // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
-//   return result;
-// };
+
 export const getOne = async (restaurantId) => {
   const restaurant = await Restaurant.findOne({ _id: restaurantId });
   return restaurant;

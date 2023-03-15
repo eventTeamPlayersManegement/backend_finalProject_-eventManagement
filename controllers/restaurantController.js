@@ -2,18 +2,11 @@ import * as Restaurant from "../models/Restaurant.js";
 
 export const getAll = async (req, res, next) => {
   try {
-    // if(req.query.city=="Berlin"){
-    //     const result = await Restaurant.cityFilterBerlin();
-    //     console.log(result)
-    //     return res.status(200).json(result);
-    // }
-    // if(req.query.city=="Munchen"){
-    //     const result = await Restaurant.cityFilterMunchen();
-    //     console.log(result)
-    //     return res.status(200).json(result);
-    // }
     if (req.query.city) {
-      const result = await Restaurant.findOnCity(req.query.city.toLowerCase());
+      const result = await Restaurant.findOnCity(
+        req.query.city,
+        req.query.capacity
+      );
       res.status(200).json(result);
     } else {
       const result = await Restaurant.getAll();
