@@ -3,12 +3,11 @@ import * as Restaurant from "../models/Restaurant.js";
 export const getAll = async (req, res, next) => {
   console.log("query",req.query)
   try {
-    // if(req.query.city == "Berlin" || req.query.city == "Munchen" ){
-        //     const result = await Restaurant.cityFilter(req);
-        //     return res.status(200).json(result);
-        // }
     if (req.query.city) {
-      const result = await Restaurant.findOnCity(req);
+      const result = await Restaurant.findOnCity(
+        req.query.city,
+        req.query.capacity
+      );
       res.status(200).json(result);
     } else {
       const result = await Restaurant.getAll();

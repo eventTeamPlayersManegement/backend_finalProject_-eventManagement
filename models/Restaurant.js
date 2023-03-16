@@ -6,6 +6,7 @@ const restaurantSchema = mongoose.Schema(
         type: String,
       required: true,
     },
+    avatar: String,
     description: {
       type: String,
     },
@@ -15,7 +16,7 @@ const restaurantSchema = mongoose.Schema(
     capacitymin: {
       type: String,
     },
-
+    price: String,
     street: String,
     houseNumber: {
       type: String,
@@ -56,13 +57,14 @@ export const create = async (document) => {
     };
   }
 };
+export const findOnCity = async (city, capacity) => {
+  const result = await Restaurant.find({
+    city,
+    capacitymin: { $gte: capacity },
+    capacitymax: { $lte: capacity },
+  });
 
-export const findOnCity = async (req) => {
-    console.log("capacity", +req.query.capacity )
-  const result = await Restaurant.find({ city: req.query.city.toLowerCase(), capacitymin: { $gte: +req.query.capacity }, capacitymax: { $lte: +req.query.capacity } });
-  // const result = await Restaurant.find({ 'address.city': req.query.city, "capacity": { $gte: +req.query.capacity }});
-    // return result;
-  // const result = await Restaurant.find( {$or:[{"address.city":"Berlin"},{"address.city":"Munchen"}]});
+
   return result;
 };
 

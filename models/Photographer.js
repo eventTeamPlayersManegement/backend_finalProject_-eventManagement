@@ -9,20 +9,12 @@ const photographerSchema = mongoose.Schema(
     price: {
       type: String,
     },
+    portfolio: String,
     avatar: String,
     description: String,
     fotos: [
       {
         type: String,
-        validate: {
-          validator: (v) => {
-            const val = v.startsWith("http") || v.startsWith("www");
-            return val;
-          },
-          message: "Please write a valid URL",
-        },
-        // unique: true,
-        // required: true,
       },
     ],
     location: String,

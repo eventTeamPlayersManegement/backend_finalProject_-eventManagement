@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const rentautoSchema = mongoose.Schema(
   {
     description: String,
-    model: String,
+    avatar: String,
+    name: String,
     price: Number,
     provider: String,
     zipCode: String,
