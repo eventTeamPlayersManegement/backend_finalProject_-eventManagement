@@ -1,6 +1,7 @@
 import * as Restaurant from "../models/Restaurant.js";
 
 export const getAll = async (req, res, next) => {
+  console.log("query",req.query)
   try {
     if (req.query.city) {
       const result = await Restaurant.findOnCity(
@@ -15,6 +16,7 @@ export const getAll = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+
 };
 export const create = async (req, res, next) => {
   try {

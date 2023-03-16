@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const restaurantSchema = mongoose.Schema(
   {
     name: {
-      type: String,
+        type: String,
       required: true,
     },
     avatar: String,
@@ -28,9 +28,9 @@ const restaurantSchema = mongoose.Schema(
     zipCode: String,
     city: String,
     fotos: [
-      {
-        type: String,
-      },
+        {
+            type: String,
+        },
     ],
   },
   { timestamps: true },
@@ -63,6 +63,7 @@ export const findOnCity = async (city, capacity) => {
     capacitymin: { $gte: capacity },
     capacitymax: { $lte: capacity },
   });
+
 
   return result;
 };
