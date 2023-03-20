@@ -17,7 +17,7 @@ const photographerSchema = mongoose.Schema(
         type: String,
       },
     ],
-    location: String,
+    city: String,
   },
   { timestamps: true },
   { versionKey: false }
@@ -42,6 +42,12 @@ export const create = async (document) => {
       message: "Photographer failed to create",
     };
   }
+};
+export const findOnCity = async (city) => {
+  const result = await Photographer.find({
+    city
+  });
+  return result;
 };
 export const getOne = async (photographerId) => {
   const photographer = await Photographer.findOne({ _id: photographerId });

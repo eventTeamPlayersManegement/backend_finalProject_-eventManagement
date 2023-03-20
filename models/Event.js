@@ -13,7 +13,7 @@ const eventSchema = mongoose.Schema(
       min: 2,
       max: 750,
     },
-    location: { type: String },
+    city: { type: String },
 
     entertainment: [
       {
