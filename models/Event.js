@@ -13,8 +13,7 @@ const eventSchema = mongoose.Schema(
       min: 2,
       max: 750,
     },
-    venue: [{ type: String /* city: "bla"*/ }],
-    decor: [],
+    city: { type: String },
 
     entertainment: [
       {
@@ -22,17 +21,14 @@ const eventSchema = mongoose.Schema(
         ref: "Entertainment",
       },
     ],
-    yourLocation: [],
-    fotos: [],
 
-    catering: [],
     rentAuto: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Rentauto",
       },
     ],
-    dreamstyle: [],
+
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Restaurant",
@@ -40,6 +36,10 @@ const eventSchema = mongoose.Schema(
     photographer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Photographer",
+    },
+
+    user: {
+      type: String,
     },
   },
   { versionKey: false },

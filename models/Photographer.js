@@ -9,30 +9,15 @@ const photographerSchema = mongoose.Schema(
     price: {
       type: String,
     },
+    portfolio: String,
     avatar: String,
+    description: String,
     fotos: [
       {
-        title: {
-          type: String,
-        },
-        description: {
-          type: String,
-        },
-        url: {
-          type: String,
-          validate: {
-            validator: (v) => {
-              const val = v.startsWith("http") || v.startsWith("www");
-              return val;
-            },
-            message: "Please write a valid URL",
-          },
-          // unique: true,
-          required: true,
-        },
+        type: String,
       },
     ],
-    location: String,
+    city: String,
   },
   { timestamps: true },
   { versionKey: false }
@@ -57,6 +42,12 @@ export const create = async (document) => {
       message: "Photographer failed to create",
     };
   }
+};
+export const findOnCity = async (city) => {
+  const result = await Photographer.find({
+    city
+  });
+  return result;
 };
 export const getOne = async (photographerId) => {
   const photographer = await Photographer.findOne({ _id: photographerId });

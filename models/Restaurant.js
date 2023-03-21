@@ -1,96 +1,98 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const restaurantSchema = mongoose.Schema({
+const restaurantSchema = mongoose.Schema(
+  {
     name: {
         type: String,
-        required: true
+      required: true,
     },
+    avatar: String,
     description: {
-        type: String
+      type: String,
     },
-    capacity: {
-        type: Number
+    capacitymax: {
+      type: String,
     },
-    // email: {
-    //     type: String,
-    //     validate: {
-    //         validator: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
-    //         message: "Please enter a valid email address"
-    //     }
-    // },
-    address:{
-        street: String,
-        houseNumber: {
-        type: String,
-        validate: {
-                validator: (v) => /^[0-9].*$/.test(v),
-                message: "Please insert some kind of number as House number"
-            }
-        },
-        zipCode: String,
-        city: String,
-        country: String,      
+    capacitymin: {
+      type: String,
     },
+    price: String,
+    street: String,
+    houseNumber: {
+      type: String,
+      validate: {
+        validator: (v) => /^[0-9].*$/.test(v),
+        message: "Please insert some kind of number as House number",
+      },
+    },
+    zipCode: String,
+    city: String,
     fotos: [
         {
-            title: {
-                type: String
-            },
-            url: {
-                type: String,
-                validate: {
-                    validator: (v) => {
-                        const val = v.startsWith("http") || v.startsWith("www")
-                        return val
-                    },
-                    message: "Please write a valid URL"
-                },
-                required: true,
-            },
-        }
+            type: String,
+        },
     ],
-  
-    
-},{ timestamps: true },{ versionKey: false });
+  },
+  { timestamps: true },
+  { versionKey: false }
+);
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 export const getAll = async () => {
-    const restaurant = await Restaurant.find();
-    return restaurant;
+  const restaurant = await Restaurant.find();
+  return restaurant;
 };
 export const create = async (document) => {
-    const newRestaurant = new Restaurant(document);
-    if (newRestaurant) {
-      return {
-        aprooved: true,
-        data: await newRestaurant.save(),
-        message: "Restaurant created ",
-      };
-    } else {
-      return {
-        aprooved: false,
-        message: "Restaurant failed to create",
-      };
-    }
+  const newRestaurant = new Restaurant(document);
+  if (newRestaurant) {
+    return {
+      aprooved: true,
+      data: await newRestaurant.save(),
+      message: "Restaurant created ",
+    };
+  } else {
+    return {
+      aprooved: false,
+      message: "Restaurant failed to create",
+    };
+  }
 };
+export const findOnCity = async (city, capacity) => {
+  const result = await Restaurant.find({
+    city,
+    capacitymin: { $gte: capacity },
+    capacitymax: { $lte: capacity },
+  });
+
+
+  return result;
+};
+
 export const getOne = async (restaurantId) => {
-    const restaurant = await Restaurant.findOne({_id: restaurantId});
-    return restaurant;
+  const restaurant = await Restaurant.findOne({ _id: restaurantId });
+  return restaurant;
 };
 export const replace = async (restaurantId, data) => {
-    const restaurant = await Restaurant.findOneAndReplace({_id: restaurantId}, data, {returnDocument: "after", runValidators: true},);
+  const restaurant = await Restaurant.findOneAndReplace(
+    { _id: restaurantId },
+    data,
+    { returnDocument: "after", runValidators: true }
+  );
 
-    return restaurant;
+  return restaurant;
 };
 export const update = async (restaurantId, data) => {
-    const restaurant = await Restaurant.findByIdAndUpdate(restaurantId, data, {new: true, runValidators: true});
+  const restaurant = await Restaurant.findByIdAndUpdate(restaurantId, data, {
+    new: true,
+    runValidators: true,
+  });
 
-    return restaurant;
+  return restaurant;
 };
 export const deleteOne = async (restaurantId) => {
-    const restaurant = await Restaurant.findByIdAndDelete(restaurantId)
+  const restaurant = await Restaurant.findByIdAndDelete(restaurantId);
 
-    return restaurant;
+  return restaurant;
 };
 
-export default Restaurant
+export default Restaurant;
