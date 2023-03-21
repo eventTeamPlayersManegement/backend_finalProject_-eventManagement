@@ -10,7 +10,7 @@ export const getRandom = async (req, res, next) => {
   try {
     let suppliersArr = [];
     const resultRes = await Restaurant.getAll();
-    console.log(resultRes + "test");
+
     if (resultRes.length) {
       suppliersArr = [
         ...suppliersArr,

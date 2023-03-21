@@ -17,7 +17,7 @@ const photographerSchema = mongoose.Schema(
         type: String,
       },
     ],
-    location: String,
+    city: String,
   },
   { timestamps: true },
   { versionKey: false }

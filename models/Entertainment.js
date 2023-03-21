@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const entertainmentSchema = mongoose.Schema(
   {
     name: String,
+    type: {
+      type: String,
+      enum: ["Clown", "Magician", "Band", "Dj"],
+    },
 
     description: String,
 

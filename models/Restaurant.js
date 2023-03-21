@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const restaurantSchema = mongoose.Schema(
   {
     name: {
-        type: String,
+      type: String,
       required: true,
     },
     avatar: String,
@@ -20,18 +20,19 @@ const restaurantSchema = mongoose.Schema(
     street: String,
     houseNumber: {
       type: String,
-      validate: {
-        validator: (v) => /^[0-9].*$/.test(v),
-        message: "Please insert some kind of number as House number",
-      },
     },
     zipCode: String,
     city: String,
     fotos: [
-        {
-            type: String,
-        },
+      {
+        type: String,
+      },
     ],
+    indoor: {
+      type: Boolean,
+
+      default: true,
+    },
   },
   { timestamps: true },
   { versionKey: false }
@@ -63,7 +64,6 @@ export const findOnCity = async (city, capacity) => {
     capacitymin: { $gte: capacity },
     capacitymax: { $lte: capacity },
   });
-
 
   return result;
 };
