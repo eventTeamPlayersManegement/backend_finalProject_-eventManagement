@@ -35,6 +35,8 @@ export const create = async (req, res, next) => {
   //       }
   //     }
   //   })();
+
+
 };
 
 export const getAll = async (req, res, next) => {
@@ -44,4 +46,5 @@ export const getAll = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+
 };

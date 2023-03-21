@@ -2,8 +2,15 @@ import * as Photographer from "../models/Photographer.js";
 
 export const getAll = async (req, res, next) => {
   try {
-    const result = await Photographer.getAll();
-    res.status(200).json(result);
+    if (req.query.city) {
+      const result = await Photographer.findOnCity(
+        req.query.city,
+      );
+      res.status(200).json(result);
+    } else {
+      const result = await Photographer.getAll();
+      res.status(200).json(result);
+    }
   } catch (error) {
     next(error);
   }

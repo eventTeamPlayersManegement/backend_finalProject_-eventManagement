@@ -43,6 +43,12 @@ export const create = async (document) => {
     };
   }
 };
+export const findOnCity = async (city) => {
+  const result = await Photographer.find({
+    city
+  });
+  return result;
+};
 export const getOne = async (photographerId) => {
   const photographer = await Photographer.findOne({ _id: photographerId });
   return photographer;
