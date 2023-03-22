@@ -11,10 +11,7 @@ const restaurantSchema = mongoose.Schema(
       type: String,
     },
     capacitymax: {
-      type: String,
-    },
-    capacitymin: {
-      type: String,
+      type: Number,
     },
     price: String,
     street: String,
@@ -32,6 +29,10 @@ const restaurantSchema = mongoose.Schema(
       type: Boolean,
 
       default: true,
+    },
+    eventtype: {
+      type: String,
+      enum: ["wedding", "birthday"],
     },
   },
   { timestamps: true },
@@ -67,7 +68,17 @@ export const findOnCity = async (city, capacity) => {
 
   return result;
 };
-
+export const getFilteredRest = async (obj) => {
+  const { eventType, indoor, city, capacity } = obj;
+  console.log(obj);
+  const result = await Restaurant.find({
+    city: city,
+    capacitymax: { $gte: capacity },
+    indoor: indoor,
+    eventtype: eventType,
+  });
+  return result;
+};
 export const getOne = async (restaurantId) => {
   const restaurant = await Restaurant.findOne({ _id: restaurantId });
   return restaurant;

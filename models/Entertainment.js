@@ -2,10 +2,11 @@ import mongoose from "mongoose";
 
 const entertainmentSchema = mongoose.Schema(
   {
+    avatar: String,
     name: String,
     type: {
       type: String,
-      enum: ["Clown", "Magician", "Band", "Dj"],
+      enum: ["clown", "magician", "band", "dj"],
     },
 
     description: String,
@@ -13,9 +14,7 @@ const entertainmentSchema = mongoose.Schema(
     price: Number,
     street: String,
     houseNumber: String,
-    zipCode: String,
     city: String,
-    country: String,
     fotos: [
       {
         type: String,

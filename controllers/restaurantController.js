@@ -15,7 +15,14 @@ export const getAll = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
+};
+export const filteredRestaurant = async (req, res, next) => {
+  try {
+    const result = await Restaurant.getFilteredRest(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 export const create = async (req, res, next) => {
   try {
