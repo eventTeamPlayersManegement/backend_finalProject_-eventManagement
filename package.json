@@ -31,7 +31,8 @@
     "express-openid-connect": "^2.12.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "stripe": "^11.15.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

@@ -55,9 +55,8 @@ export const getOneUser = async (id) => {
 };
 
 export const updateOneUser = async (id, data) => {
-  console.log(data);
   const user = await User.findByIdAndUpdate(id, { $push: { ...data } });
-  console.log(user);
+
   return user;
 };
 export const deleteOne = async (id) => {

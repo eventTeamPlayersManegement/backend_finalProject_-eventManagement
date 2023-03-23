@@ -1,33 +1,21 @@
 import mongoose from "mongoose";
+import User, { updateOneUser } from "./User.js";
 const eventSchema = mongoose.Schema(
   {
-    category: {
-      type: String,
-    },
-    date: {},
-    budget: {
+    cost: {
       type: Number,
-    },
-    guestsNumber: {
-      type: Number,
-      min: 2,
-      max: 750,
     },
     city: { type: String },
+    restname: { type: String },
+    entertainment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Entertainment",
+    },
 
-    entertainment: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Entertainment",
-      },
-    ],
-
-    rentAuto: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Rentauto",
-      },
-    ],
+    rentauto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rentauto",
+    },
 
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
@@ -39,8 +27,10 @@ const eventSchema = mongoose.Schema(
     },
 
     user: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
+    stripe: {},
   },
   { versionKey: false },
   { timestamps: true }
@@ -53,6 +43,7 @@ export const getAll = async (document) => {
 };
 export const create = async (document) => {
   const newEvent = new Event(document);
+  await updateOneUser(document.user, { events: newEvent._id });
   if (newEvent) {
     return {
       aprooved: true,
@@ -67,8 +58,12 @@ export const create = async (document) => {
   }
 };
 export const getOne = async (eventId) => {
-  const event = await Event.findOne({ _id: eventId });
-  return event;
+  const event = await Event.findOne({ _id: eventId })
+    .populate("user")
+    .populate("photographer")
+    .populate("restaurant")
+    .populate("rentauto")
+    .populate("entertainment");
 };
 export const replace = async (eventId, data) => {
   const event = await Event.findOneAndReplace({ _id: eventId }, data, {

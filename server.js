@@ -13,7 +13,7 @@ import restaurantRoutes from "./routes/restaurantRoutes.js";
 import entertainmentRoutes from "./routes/entertainmentRoutes.js";
 import rentautoRoutes from "./routes/rentautoRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
-
+import stripe from "stripe";
 //Cookie
 import cookieParser from "cookie-parser";
 //Die beiden imports benötigen wir, damit wir die html Dateien finden
@@ -22,10 +22,13 @@ import { dirname } from "path";
 import suppliersRoutes from "./routes/suppliersRoute.js";
 import userRouter from "./routes/userRouter.js";
 import conversationRouter from "./routes/conversationRouter.js";
+import stripeRouter from "./routes/stripeRoutes.js";
 // speichert unser aktuelles Verzeichnis in der Variable __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PORT = process.env.PORT;
+const STRIPE = process.env.STRIPE_KEY;
+
 const app = express();
 
 const { auth, requiresAuth } = pkg;
@@ -37,6 +40,7 @@ const config = {
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUERBASEURL,
 };
+stripe(STRIPE);
 
 //set middlewares
 app.use(express.json());
@@ -68,6 +72,7 @@ app.use("/api/entertainment", entertainmentRoutes);
 app.use("/api/rentauto", rentautoRoutes);
 app.use("/api/suppliers", suppliersRoutes);
 app.use("/api/message", messageRoutes);
+app.use("/api/stripe", stripeRouter);
 app.use(express.static("uploads"));
 app.use("/", express.static("./dist"));
 // app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
