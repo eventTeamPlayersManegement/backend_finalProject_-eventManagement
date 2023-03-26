@@ -54,10 +54,10 @@ app.use(auth(config));
 //   })
 // );
 
-// app.get("/", function (req, res, next) {
-//   // res.status(200).send(req.oidc.isAuthenticated() ? "login" : "logout");
-//   res.redirect("http://localhost:5173");
-// });
+app.get("/", function (req, res, next) {
+  // res.status(200).send(req.oidc.isAuthenticated() ? "login" : "logout");
+  res.redirect("http://localhost:5173");
+});
 
 app.get("/profile", requiresAuth(), function (req, res, next) {
   res.json({ user: req.oidc.user, message: `logged ${req.oidc.user.name}` });
@@ -73,9 +73,9 @@ app.use("/api/rentauto", rentautoRoutes);
 app.use("/api/suppliers", suppliersRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/stripe", stripeRouter);
-app.use(express.static("uploads"));
-app.use("/", express.static("./dist"));
-app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
+// app.use(express.static("uploads"));
+// app.use("/", express.static("./dist"));
+// app.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
 app.use("/:notfound", notFound);
 
 app.use(error);
