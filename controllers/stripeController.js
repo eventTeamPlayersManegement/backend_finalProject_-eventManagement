@@ -29,9 +29,9 @@ export const createPayment = async (req, res, next) => {
       line_items: [req.body],
       mode: "payment",
       success_url: "http://localhost:5173/thanks",
-      cancel_url: "http://localhost:5173",
+      cancel_url: "http://localhost:5173/services",
     });
-    console.log(session);
+
     res.status(200).json(session.url);
   } catch (error) {
     next(error);
